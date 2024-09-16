@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviourPun
         rb.velocity = new Vector2(direction.x * speed, rb.velocity.y);
 
         Vector2 playerPosition = transform.position;
-        playerPosition.x = Mathf.Clamp(playerPosition.x, -GameManager.instance.ScreenBounds.x, GameManager.instance.ScreenBounds.x);
+        playerPosition.x = Mathf.Clamp(playerPosition.x, -GameManager.instance.ScreenBounds.x + 1 , GameManager.instance.ScreenBounds.x - 1);
 
         transform.position = playerPosition;
     }
