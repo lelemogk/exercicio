@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class GameManager : MonoBehaviourPun
+public class GameManager : MonoBehaviourPunCallbacks
 {
     #region Singleton
     public static GameManager instance;
@@ -20,12 +20,13 @@ public class GameManager : MonoBehaviourPun
         {
             Destroy(gameObject);
         }
-        screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width - 1, Screen.height + 1));
+        screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width - 2, Screen.height + 2));
     }
     #endregion
     Vector2 screenBounds;
     int score;
     int playersInGame = 0;
+    Apple apple;
 
     public Vector2 ScreenBounds { get => screenBounds; }
     public int Score { get => score; set => score = value; }
@@ -44,11 +45,15 @@ public class GameManager : MonoBehaviourPun
         player.photonView.RPC("Initialize", RpcTarget.All);
     }
 
-    [PunRPC]
-    public void AddScore()
+    public void AddScore(int score)
     {
-        score++;
-        UIManager.instance.UpdateScoreText();
+        photonView.RPC("AddScoreRPC", RpcTarget.All, score);
+    }
+    [PunRPC]
+    public void AddScoreRPC(int scorer)
+    {
+        score += scorer;
+        UIManager.instance.UpdateScoreText(score);
     }
     [PunRPC]
     private void AddPlayer()

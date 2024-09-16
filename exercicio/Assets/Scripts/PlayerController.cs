@@ -12,17 +12,10 @@ public class PlayerController : MonoBehaviourPun
     [SerializeField]float speed = 10;
     [SerializeField] Rigidbody2D rb;
 
-
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
     private void Update()
     {
         
-        if (controllerOn)
+        if (!controllerOn)
         {
             direction.x = Input.GetAxis("Horizontal");
             Movement();
@@ -40,9 +33,12 @@ public class PlayerController : MonoBehaviourPun
         transform.position = playerPosition;
     }
 
+
     [PunRPC]
     public void Initialize()
     {
+        rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         if (!photonView.IsMine)
         {
             Color newColor = spriteRenderer.color;
@@ -56,7 +52,6 @@ public class PlayerController : MonoBehaviourPun
     {
         if (collision.gameObject.tag == "Apple")
         {
-            photonView.RPC("AddScore", RpcTarget.All);
             PhotonNetwork.Destroy(collision.gameObject);
         }
     }

@@ -18,9 +18,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText, finalScoreText, recordText;
     [SerializeField] GameObject gameOverWindow;
 
-    public void UpdateScoreText()
+    public void UpdateScoreText(int score)
     {
-        scoreText.text = GameManager.instance.Score.ToString();
+        scoreText.text = score.ToString();
     }
 
     public void GameOver()

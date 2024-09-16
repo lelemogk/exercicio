@@ -25,7 +25,7 @@ public class Apple : MonoBehaviourPun
     // Update is called once per frame
     void Update()
     {
-        
+        photonView.RPC("Destroy", RpcTarget.All);
     }
 
     Vector2 GeneratePosition(GameObject apple)
@@ -40,6 +40,14 @@ public class Apple : MonoBehaviourPun
     [PunRPC]
     void Destroy()
     {
+        Destroy(gameObject, 2);
+    }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            GameManager.instance.AddScore(score);
+        }
     }
 }
