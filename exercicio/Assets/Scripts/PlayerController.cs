@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviourPun
     private void Update()
     {
         
-        if (!controllerOn)
+        if (controllerOn)
         {
             direction.x = Input.GetAxis("Horizontal");
             Movement();
