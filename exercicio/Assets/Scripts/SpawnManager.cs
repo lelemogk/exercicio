@@ -19,41 +19,41 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (NetworkManager.instance.masterClient)
-        {
-            Spawn();
-        }
+        Spawn();
+        
     }
 
     void Spawn()
     {
-        timer -= Time.deltaTime;
-
-        string appleSelected;
-
-        if (timer <= 0)
+        if (NetworkManager.instance.masterClient)
         {
-            float appleIndex = Random.Range(0f, 1f);
+            timer -= Time.deltaTime;
 
+            string appleSelected;
 
-            if (appleIndex < 0.5f)
+            if (timer <= 0)
             {
-                appleSelected = apples[0];
-            }
-            else if(appleIndex < 0.8f && appleIndex > 0.5f)
-            {
-                appleSelected = apples[1];
-            }
-            else
-            {
-                appleSelected = apples[2];
-            }
-
-            NetworkManager.instance.Instantiate(appleSelected, new Vector2(Random.Range(-10, 10), GameManager.instance.ScreenBounds.y), Quaternion.identity);
+                float appleIndex = Random.Range(0f, 1f);
 
 
-            timer = cooldown;
+                if (appleIndex < 0.5f)
+                {
+                    appleSelected = apples[0];
+                }
+                else if (appleIndex < 0.8f && appleIndex > 0.5f)
+                {
+                    appleSelected = apples[1];
+                }
+                else
+                {
+                    appleSelected = apples[2];
+                }
+
+                NetworkManager.instance.Instantiate(appleSelected, new Vector2(Random.Range(-10, 10), GameManager.instance.ScreenBounds.y), Quaternion.identity);
+
+
+                timer = cooldown;
+            }
         }
-
     }
 }
