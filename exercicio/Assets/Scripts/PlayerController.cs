@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviourPun
 {
     [SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] bool controllerOn;
+    [SerializeField] bool controllerOn = true;
     [SerializeField] Vector2 direction;
     [SerializeField]float speed = 10;
     [SerializeField] Rigidbody2D rb;
@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviourPun
     private void Update()
     {
         
-        if (controllerOn)
+        if (!controllerOn)
         {
             direction.x = Input.GetAxis("Horizontal");
             Movement();
