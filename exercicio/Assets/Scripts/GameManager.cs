@@ -24,9 +24,6 @@ public class GameManager : MonoBehaviourPun
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width - 1, Screen.height + 1));
     }
     #endregion
-
-
-    TextMeshProUGUI scoreText;
     Vector2 screenBounds;
     int score;
     int playersInGame = 0;
@@ -34,18 +31,17 @@ public class GameManager : MonoBehaviourPun
     public Vector2 ScreenBounds { get => screenBounds; }
     public int Score { get => score; set => score = value; }
 
-    const string playerPrefabPath = "Prefabs/Player";
+    const string playerPrefabPath = "Prefabs/basket";
     
 
     private void Start()
     {
-        scoreText = GetComponent<TextMeshProUGUI>();
         photonView.RPC("AddPlayer", RpcTarget.AllBuffered);
     }
 
     private void CreatePlayer()
     {
-        /*Player player = */NetworkManager.instance.Instantiate(playerPrefabPath, new Vector3(-5, 0), Quaternion.identity); //.GetComponent<Player>();
+        /*Player player = */NetworkManager.instance.Instantiate(playerPrefabPath, new Vector3(-2, -4), Quaternion.identity); //.GetComponent<Player>();
         /*player.*/photonView.RPC("Initialize", RpcTarget.All);
     }
 
@@ -53,7 +49,7 @@ public class GameManager : MonoBehaviourPun
     public void AddScore()
     {
         score++;
-        scoreText.text = score.ToString();
+        UIManager.instance.UpdateScoreText();
     }
     [PunRPC]
     private void AddPlayer()
