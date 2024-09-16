@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviourPun
         {
             Destroy(gameObject);
         }
-
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width - 1, Screen.height + 1));
     }
     #endregion
@@ -41,8 +40,8 @@ public class GameManager : MonoBehaviourPun
 
     private void CreatePlayer()
     {
-        /*Player player = */NetworkManager.instance.Instantiate(playerPrefabPath, new Vector3(-2, -4), Quaternion.identity); //.GetComponent<Player>();
-        /*player.*/photonView.RPC("Initialize", RpcTarget.All);
+        PlayerController player = NetworkManager.instance.Instantiate(playerPrefabPath, new Vector3(-2, -4), Quaternion.identity).GetComponent<PlayerController>();
+        player.photonView.RPC("Initialize", RpcTarget.All);
     }
 
     [PunRPC]
