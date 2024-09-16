@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 0}
-  controllerOn: 0
+  controllerOn: 1
   direction: {x: 0, y: 0}
   speed: 10
   rb: {fileID: -4430645131250828066}

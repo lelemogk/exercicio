@@ -28,15 +28,6 @@ public class Apple : MonoBehaviourPun
         photonView.RPC("Destroy", RpcTarget.All);
     }
 
-    Vector2 GeneratePosition(GameObject apple)
-    {
-        Vector2 spriteBounds = apple.GetComponent<SpriteRenderer>().bounds.size / 2;
-
-        Vector2 bounds = new Vector2(screenBounds.x - spriteBounds.x, screenBounds.y + spriteBounds.y);
-
-        return new Vector2(Random.Range(-bounds.x, bounds.x), bounds.y);
-    }
-
     [PunRPC]
     void Destroy()
     {

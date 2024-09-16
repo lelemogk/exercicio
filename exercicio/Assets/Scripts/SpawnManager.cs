@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,7 +26,7 @@ public class SpawnManager : MonoBehaviour
 
     void Spawn()
     {
-        if (NetworkManager.instance.masterClient)
+        if (Photon.Pun.PhotonNetwork.IsMasterClient)
         {
             timer -= Time.deltaTime;
 
